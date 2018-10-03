@@ -6,7 +6,7 @@ Simply add in your global config file `~/.config/rebar3/rebar.config` :
 
 ```
 {plugins, [
-  {geas_release_rebar3, {git, "link", {branch, "master"}}}
+  {geas_release_rebar3, {git, "https://github.com/grepz/geas_release_rebar3.git", {branch, "master"}}}
 ]}.
 
 ```
