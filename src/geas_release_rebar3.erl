@@ -3,7 +3,7 @@
 
 -export([init/1, do/1, format_error/1]).
 
--define(PROVIDER, geas).
+-define(PROVIDER, geas_release).
 -define(DEPS, [compile]).
 
 %% ===================================================================
@@ -19,8 +19,8 @@ init(State) ->
             {deps, ?DEPS},              % The list of dependencies
             {example, "rebar geas"},    % How to use the plugin
             {opts, opts()},             % list of options understood by the plugin
-            {short_desc, "Geas rebar3 plugin"},
-            {desc, "See https://github.com/crownedgrouse/geas"}
+            {short_desc, "Geas release rebar3 plugin"},
+            {desc, "DESC"}
     ]),
     {ok, rebar_state:add_provider(State, Provider)}.
 
@@ -69,6 +69,7 @@ release_window_info(true, AppsInfo) ->
                       {_, AppRelMin, AppRelMax, _} ->
                           RelMin1 = geas:highest_version(AppRelMin, RelMin0),
                           RelMax1 = geas:lowest_version(AppRelMax, RelMax0),
+                          io:format("~p ::: ~p/////~p~n", [RelMin1, RelMax1, App]),
                           {RelMin1, RelMax1, Unknown}
                   end
           end, {[], [], []}, AppsInfo),
