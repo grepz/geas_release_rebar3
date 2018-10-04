@@ -13,12 +13,12 @@
 -spec init(rebar_state:t()) -> {ok, rebar_state:t()}.
 init(State) ->
     Provider = providers:create([
-            {name, ?PROVIDER},          % The 'user friendly' name of the task
-            {module, ?MODULE},          % The module implementation of the task
-            {bare, true},               % The task can be run by the user, always true
-            {deps, ?DEPS},              % The list of dependencies
-            {example, "rebar geas"},    % How to use the plugin
-            {opts, opts()},             % list of options understood by the plugin
+            {name, ?PROVIDER},
+            {module, ?MODULE},
+            {bare, true},
+            {deps, ?DEPS},
+            {example, "rebar geas_release -r 21.1"},
+            {opts, opts()},
             {short_desc, "Geas release rebar3 plugin"},
             {desc, "DESC"}
     ]),
@@ -69,7 +69,6 @@ release_window_info(true, AppsInfo) ->
                       {_, AppRelMin, AppRelMax, _} ->
                           RelMin1 = geas:highest_version(AppRelMin, RelMin0),
                           RelMax1 = geas:lowest_version(AppRelMax, RelMax0),
-                          io:format("~p ::: ~p/////~p~n", [RelMin1, RelMax1, App]),
                           {RelMin1, RelMax1, Unknown}
                   end
           end, {[], [], []}, AppsInfo),
